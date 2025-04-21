@@ -1,0 +1,36 @@
+import yagmail
+import os
+
+# 附件路径
+attachment_path = r'C:\Users\...'
+
+
+
+# 检查文件是否存在
+if not os.path.exists(attachment_path):
+    print("❌ 附件文件不存在！请检查路径")
+else:
+    # 初始化邮箱服务器
+    yag_server = yagmail.SMTP(
+        user='...@qq.com',
+        password='...',  # QQ邮箱授权码
+        host='smtp.qq.com'
+    )
+
+    # 邮件内容设置
+    email_to = ['...@qq.com']
+    email_title = '...'
+    email_content = '...'
+    email_attachments = [attachment_path]
+
+    # 发送邮件
+    yag_server.send(
+        to=email_to,
+        subject=email_title,
+        contents=email_content,
+        attachments=email_attachments
+    )
+
+    # 关闭连接
+    yag_server.close()
+    print("✅ 邮件发送成功！")
